@@ -1,0 +1,87 @@
+import java.util.Scanner;
+import java.io.*;
+import java.net.*;
+
+public class automateOne {
+	public static void cambridgeReset() {
+		System.out.println("Welcome Cambridge user! Please enter your PCC username: ");
+		Scanner camUser = new Scanner(System.in);
+		String camUse = camUser.next();
+		int ssn = 1234;
+		String username = "NaderYT";
+		
+		
+		System.out.println("Ok, so your username is " + camUse + ", correct?");
+		Scanner camCon = new Scanner(System.in);
+		String camConf = camCon.next();
+		
+		if (camConf.equals("yes") || camConf.equals("Yes")) {
+			System.out.println("Sounds good, please verify the last four of your SSN: ");
+			Scanner ssnConfirm = new Scanner(System.in);
+			int ssnCon = ssnConfirm.nextInt();
+			System.out.println("Ok, so the last four of your SNN are " + ssnCon + ", is this correct?");
+			camConf = camCon.next();
+			if (camConf.equals("yes") || camConf.equals("Yes") && ssn == ssnCon && camUse.equals(username)) {
+				System.out.println("Found the account. Please enter a new password: ");
+				Scanner newPass = new Scanner(System.in);
+				String newPW = newPass.next();
+				System.out.println("Ok, pleae confirm your password: ");
+				Scanner conPass = new Scanner(System.in);
+				String conPW = conPass.next();
+				if (newPW.equals(conPW)) {
+					System.out.println("Ok, your password has been set to " + newPW + ". Are you able to log in?");
+					
+				}
+				
+			}
+			
+			
+			/* so now is where i need the PCC API in order to actually grab the details, 
+			since i would user the username and the ssn past here to check for a user, ill use dummy code for now*/ }
+		else { 
+			cambridgeReset();
+		}
+		
+		
+		
+	}
+	public static void company() {
+		
+		Scanner compID = new Scanner(System.in);
+		System.out.println("Please enter company ID: ");
+		int companyID = compID.nextInt();
+	
+		if (companyID == 1) { // copy this if statement for each company
+			System.out.println("You entered Cambridge, is this correct?");
+			String camCon;
+			Scanner cambridgeConfirm = new Scanner(System.in);
+			camCon = cambridgeConfirm.next();
+			if (camCon.equals("yes") || camCon.equals("Yes")) {
+			cambridgeReset();
+			}  
+			else {
+				System.out.println("Ok, let's go back a step.");
+				company();
+			}
+			
+			
+			
+		}
+		else {
+			tryAgain();
+		}
+		
+	}
+	public static void main(String[] args) {
+		company();
+		tryAgain();
+		cambridgeReset();
+		
+	
+		
+		}
+	public static void tryAgain() {
+		System.out.println("That does not match any company ID, please try again.");
+		company();
+	}
+	}
